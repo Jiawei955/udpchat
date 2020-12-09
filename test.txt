@@ -1,0 +1,126 @@
+1. test output for test case one in the instruction
+client a:
+jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c a 127.0.0.1 10001 20002
+>>> [Welcome, You are registered.]
+>>> [Client table updated.]
+>>>
+>>> [Client table updated.]
+>>> send b hi i am a!
+[Message received by b.]
+>>> send c hi i am a!
+[Message received by c.]
+>>>
+>>> client b: hi i am b!
+>>>
+>>> client c: hi i am c!
+>>> dereg a
+
+>>> [You are Offline. Bye.]
+>>> reg a
+>>>
+>>> You Have Messages:
+>>> b: Sat Nov 28 17:57:53 2020 are you still there?
+>>> c: Sat Nov 28 17:58:03 2020 are you still there?
+
+>>>
+>>> [Client table updated.]
+
+
+client b:
+(base) jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c b 127.0.0.1 10001 20001
+>>> [Welcome, You are registered.]
+>>> [Client table updated.]
+>>>
+>>> client a: hi i am a!
+>>> send a hi i am b!
+[Message received by a.]
+>>> send c hi i am c!
+[Message received by c.]
+>>>
+>>> client c: hi i am c!
+>>>
+>>> [Client table updated.]
+>>> send a are you still there?
+>>> [Messages received by the server and saved]
+>>>
+>>> [Client table updated.]
+
+
+client c:
+(base) jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c c 127.0.0.1 10001 20003
+>>> [Welcome, You are registered.]
+>>> [Client table updated.]
+>>>
+>>> [Client table updated.]
+>>>
+>>> [Client table updated.]
+>>>
+>>> client a: hi i am a!
+>>>
+>>> client b: hi i am c!
+>>> send a hi i am c!
+[Message received by a.]
+>>> send b hi i am c!
+[Message received by b.]
+>>>
+>>> [Client table updated.]
+>>> send a are you still there?
+>>> [Messages received by the server and saved]
+>>>
+>>> [Client table updated.]
+
+
+
+2. test output for test case two in the instruction
+client a:
+jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c a 127.0.0.1 10001 20002
+>>> [Welcome, You are registered.]
+>>> [Client table updated.]
+>>>
+>>> [Client table updated.]
+>>>
+>>> [Client table updated.]
+>>> send b hi, b
+>>> [No ACK from the server.]
+jiawezhang@JIAWEs-MacBook-Pro UdpChat %
+
+
+client b:
+jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c b 127.0.0.1 10001 20001
+>>> [Welcome, You are registered.]
+>>> [Client table updated.]
+>>> dereg b
+
+>>> [You are Offline. Bye.]
+>>>
+
+server:
+jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -s 10001
+^CTraceback (most recent call last):
+  File "udpchat.py", line 80, in <module>
+    message, clientAddress = server.serverSocket.recvfrom(2048)
+KeyboardInterrupt
+jiawezhang@JIAWEs-MacBook-Pro UdpChat %
+
+
+
+3. register with same username
+client b:
+jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c b 127.0.0.1 10001 20002
+>>> [Welcome, You are registered.]
+>>> [Client table updated.]
+>>>
+
+another client b:
+jiawezhang@JIAWEs-MacBook-Pro UdpChat % python udpchat.py -c b 127.0.0.1 10001 20001
+error: this username has already registered, choose another one!
+
+
+
+
+
+
+
+
+
+
